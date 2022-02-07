@@ -25,6 +25,7 @@ body::-webkit-scrollbar {
 body{
 	background-color: #000;
 }
+/* css_animation.htmlへのリンク用に追加 */
 .link{
 	position: absolute;
 	right: 4%;
@@ -44,13 +45,23 @@ body{
     justify-items: center;
 }
 @keyframes btn-light {
-	0%,100%{
-		box-shadow: inset 0px 0px 20px #0008,
-					0px 0px 1px #fff1;
+	0%, 100% {
+		box-shadow: 
+			inset 0px 0px 15px #0008,
+			inset 0px 0px 10px #0004,
+			inset 0px 0px  5px #0002,
+			0px 0px  1px #fff1,
+			0px 0px  5px #fff2,
+			0px 0px 10px #fff4;
 	}
-	50%{
-		box-shadow: inset 0px 0px 10px #000,
-					0px 0px 20px #fff8;
+	50% {
+   		box-shadow:
+			inset 0px 0px 10px #0004,
+			inset 0px 0px  5px #0002,
+			inset 0px 0px  1px #0001,
+			0px 0px  5px #fff2,
+			0px 0px 10px #fff4,
+			0px 0px 20px #fff8;
 	}
 }
 #contents {
@@ -70,8 +81,9 @@ form {
 	align-self: center;
 }
 fieldset{
-	background: linear-gradient(-3deg,rgba(200,200,255,0.7),85%,rgba(255,255,255,0.7) 95%),
-							linear-gradient(345deg,rgba(48,48,100,0.5),rgba(255,255,255,0.1) 80%);
+	background:
+		linear-gradient(-3deg,rgba(200,200,255,0.7),85%,rgba(255,255,255,0.7) 95%),
+		linear-gradient(345deg,rgba(48,48,100,0.5),rgba(255,255,255,0.1) 80%);
 	width: 250px;
 	padding: 15px;
 	border-radius: 22px;
@@ -132,8 +144,9 @@ input[type="number"]{
 	width: 180px;
 }
 input[type="button"]{
-	background: linear-gradient(0deg,rgba(150,150,150,0.7), 95%,rgba(255,255,255,0.7)),
-							linear-gradient(340deg,rgba(48,48,100,0.3),rgba(255,255,255,0.1) 70%);
+	background:
+		linear-gradient(0deg,rgba(150,150,150,0.7), 95%,rgba(255,255,255,0.7)),
+		linear-gradient(340deg,rgba(48,48,100,0.3),rgba(255,255,255,0.1) 70%);
 	border-radius: 10px;
 	color: #fff;
 	text-shadow: 0 0 1px #000;
@@ -142,9 +155,6 @@ input[type="button"]{
 	letter-spacing: 0.5em;
 	width: 80%;
 }
-
-
-
 table{
 	margin-left: auto;
 	margin-right: auto;
