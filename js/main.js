@@ -25,6 +25,8 @@ $(function(){
 		board.updateTable();
 		ms.reset = ms.inputValue;
 		$('.result').removeClass('active');
+		// 背景色をリセット
+		$('#contents').css({'--i':0});
 	});
 	// 右クリック時のイベント
 	$('#table1').on('contextmenu','td',function(){
