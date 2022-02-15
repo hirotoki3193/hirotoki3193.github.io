@@ -12,6 +12,7 @@ body::-webkit-scrollbar {
 }
 section{
 	min-height: 100vh;
+	overflow: hidden;
 }
 section::before,header::before {
     content: "";
@@ -34,6 +35,46 @@ section::before,header::before {
 }
 /* clear-fixここまで */
 
+.link{
+	position: fixed;
+	right: 2%;
+	top: 2%;
+	background-color: #fff;
+	width: clamp(40px,6vh,60px);
+	height: clamp(40px,6vh,60px);
+	border-radius: 50%;
+	animation: btn-light 5s infinite;
+	z-index: 100;
+
+}
+.link > a{
+	position: relative;
+	display: grid;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-items: center;
+}
+@keyframes btn-light {
+	0%, 100% {
+		box-shadow: 
+			inset 0px 0px 15px #0008,
+			inset 0px 0px 10px #0004,
+			inset 0px 0px  5px #0002,
+			0px 0px  1px #fff1,
+			0px 0px  5px #fff2,
+			0px 0px 10px #fff4;
+	}
+	50% {
+   		box-shadow:
+			inset 0px 0px 10px #0004,
+			inset 0px 0px  5px #0002,
+			inset 0px 0px  1px #0001,
+			0px 0px  5px #fff2,
+			0px 0px 10px #fff4,
+			0px 0px 20px #fff8;
+	}
+}
 .hero {
 	min-height: 100vh;
 	width: 100%;
@@ -67,12 +108,13 @@ section::before,header::before {
 	font-weight: bold;
 	transition: 1s ease-out;
 	text-transform: uppercase;
-	/* display: none; */
+	display: flex;
+	column-gap: 10px;
 
 }
-.hero label{
-	padding: 10px 70px;
-	z-index: 1;
+.hero label span{
+	font-size: 3rem;
+	font-weight: bold;
 }
 .hero form img {
 	position: absolute;
@@ -145,34 +187,43 @@ label:hover ~ img{
 }
 
 .main{
-	display: none;	
+	display: none;
+	position: relative;
 }
 .main.active{
-	display: block;
+	display: flex;
 }
-header{
-	position: sticky;
+.main header{
+	position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
+	width: 100%;
 }
-ul{
+.main ul{
 	display: flex;
     justify-content: space-evenly;
     list-style: none;
     height: 50px;
     align-items: center;
-    background: #fff8;
+    background: #ccc8;
 }
-li{
+.main li{
 	box-shadow: inset 0px 0px 30px #0001,
 				0px 0px 50px #0002;
 	border-radius: 10px;
 	padding: 5px 16px;
 }
-
+section{
+	flex: 33%;
+	transition: 1s;
+}
+section.show{
+	flex: 200%;
+	z-index: 1;
+}
 .regular-octagon{
-	width: 100vw;
+	width: 100%;
 	height: 100vh;
 	overflow: hidden;
 	display: flex;
@@ -192,7 +243,6 @@ li{
 	height: 100%;
 	/* background-color: #ff04; */
 	animation: rotate 50s linear infinite;
-
 }
 .top,.bottom{
 	position: absolute;
@@ -229,8 +279,6 @@ li{
 	border-left: 100px solid transparent;
 	border-bottom: 173px solid #fff1;
 }
-
-
 
 .three-dimention-year{
 	min-height: 100vh;
@@ -324,7 +372,7 @@ li{
 .words {
     position: relative;
     transform-style: preserve-3d;
-    animation: animate 25s linear infinite;
+    animation: animate 50s linear infinite;
     
 }
 .circle-text-animation span{
