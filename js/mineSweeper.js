@@ -42,7 +42,7 @@ class MineSweeper{
 	}
 	set inputValue(arr){
 		console.assert(arr.length == 3,'引数が不正な値です');
-		[this._width,this._height,this._mineCount] = arr;
+		[this._height,this._width,this._mineCount] = arr;
 		this._value = arr;
 	}
 	set reset(inputValArray){
@@ -56,32 +56,31 @@ class MineSweeper{
 		return this._isStart;
 	}
 	// 地雷設置
-	set start(tdID){
-		let startPosition = this.getPosition(tdID);
-		console.assert(startPosition.length == 2,'引数が不正な値です');
+	set gameStart(tdID){
+		let startPosition = this.str2IndexArr(tdID);
+		console.assert(startPosition.length == 2,'初期IDが不正な値です');
 		const sX = startPosition[0],
 			  sY = startPosition[1];
-		
 		let mine = this._mineCount;
 		if(this._width * this._height - 2 < mine){
 			console.log('地雷の数が多いよ！');
 			this._isStart = false;
+			return;
 		} else {
 			// 初期クリック地点には地雷は設置しない
-			this._vboard[sX][sY] = 100;
+			this._vboard[sY][sX] = 100;
 			$('#x'+(sX+1)+'y'+(sY+1)).addClass('safe');
 			let count = 0;
 			while(count < mine){
 				let x = Math.floor(Math.random() * (this._width));
 				let y = Math.floor(Math.random() * (this._height));
 				// 設置済みはスルー
-				if(this._vboard[x][y] > 0){
+				if(this._vboard[y][x] > 0){
 						continue;
 				}
 				// 地雷を設置
-				this._vboard[x][y] = 1;
+				this._vboard[y][x] = 1;
 				count++;
-
 				// デバッグ用にクラスを付加:消しても大丈夫
 				// let nowId = this.index2id(x,y);
 				// $(nowId).addClass('mine');
@@ -101,7 +100,7 @@ class MineSweeper{
 	set addQueue(position){
 		this._queue.push(position);
 	}
-	getPosition(tdID){
+	str2IndexArr(tdID){
 		let position = tdID.replace('x','').split('y');
 		// 配列用に変換
 		return [Number(position[0])-1,Number(position[1])-1];
@@ -109,9 +108,9 @@ class MineSweeper{
 	// 地雷の位置を配列で取得
 	get mines(){
 		let arr = [];
-		for(let x=0;x<this._width;x++){
-			for(let y=0;y<this._height;y++){
-				if(this._vboard[x][y]===1){
+		for(let y=0;y<this._height;y++){
+			for(let x=0;x<this._width;x++){
+				if(this._vboard[y][x]===1){
 					arr.push({
 						'x':x,
 						'y':y
@@ -132,22 +131,21 @@ class MineSweeper{
 			  y = position[1];
 		let nowId = this.index2id(x,y);
 		// チェック済み
-		if(this._checked[x][y]){
+		if(this._checked[y][x]){
 			return;
 		// 地雷を選択した場合
-		}else if(this._vboard[x][y] == 1){
+		}else if(this._vboard[y][x] == 1){
 			$(nowId).addClass('end');
 			let mines = this.mines;
 			for(let mine of mines){
 				let mineId = this.index2id(mine.x,mine.y);
 				$(mineId).addClass('mine');
 			}
-			console.log('ゲームオーバー...');
 			this._isEnd = true;
 			return;
 		}
 
-		this._checked[x][y] = 1;
+		this._checked[y][x] = 1;
 		$(nowId).addClass('safe');
 		// 周辺の地雷数を調べる
 		let count = 0;
@@ -160,7 +158,7 @@ class MineSweeper{
 			if(nx < 0 || nx >= this._width || ny < 0 || ny >= this._height){
 				continue;
 			}
-			else if(this._vboard[nx][ny] == 1){
+			else if(this._vboard[ny][nx] == 1){
 				count++;
 			}
 		}
@@ -172,7 +170,7 @@ class MineSweeper{
 				if(nx < 0 || nx >= this._width || ny < 0 || ny >= this._height){
 					continue;
 				}
-				if(!this._checked[nx][ny]){
+				if(!this._checked[ny][nx]){
 					this.addQueue = [nx,ny];
 				}
 			}

@@ -46,7 +46,7 @@ $(function(){
 		let tdId = $(this).attr('id');
 		// ゲーム開始前
 		if(!ms.start){
-			ms.start = tdId;
+			ms.gameStart = tdId;
 			if(!ms.start){
 				console.log('設置に失敗しました')
 				// 終了状態へ移行
@@ -59,7 +59,7 @@ $(function(){
 			let que = ms.queue;
 
 			// bfs
-			que.push(ms.getPosition(tdId));
+			que.push(ms.str2IndexArr(tdId));
 			while(que.length){
 				let cell = que.shift();
 				ms.checkIsSafe(cell);
