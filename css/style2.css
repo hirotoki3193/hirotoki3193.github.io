@@ -304,6 +304,7 @@ section.show{
 	gap: 10px;
 	z-index: 5;
 	transition: 1s;
+	cursor: pointer;
 }
 .year{
 	width: 100px;
