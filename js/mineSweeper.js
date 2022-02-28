@@ -3,7 +3,8 @@ generate2DArray = (m, n) => {
 	return Array.from(new Array(m), _ => new Array(n).fill(0));
 };
 const	dx = [1,-1,0,0,1,1,-1,-1],
-		dy = [0,0,1,-1,1,-1,1,-1];
+	dy = [0,0,1,-1,1,-1,1,-1],
+      	dlen = dx.length;
 
 // マインスイーパーはここから
 // TableObject.jsが必要
@@ -151,7 +152,7 @@ class MineSweeper{
 		let count = 0;
 		
 
-		for(let i=0;i<dx.length;i++){
+		for(let i=0;i<dlen;i++){
 			let nx = x + dx[i],
 				ny = y + dy[i];
 			// 範囲外はカウントしない
@@ -163,7 +164,7 @@ class MineSweeper{
 			}
 		}
 		if(count == 0){
-			for(let i=0;i< dx.length;i++){
+			for(let i=0;i<dlen;i++){
 				let nx = x + dx[i],
 					ny = y + dy[i];
 				// 範囲外は探しに行かない
