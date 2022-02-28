@@ -77,7 +77,9 @@ class MineSweeper{
 				let y = Math.floor(Math.random() * (this._height));
 				// 設置済みはスルー
 				if(this._vboard[y][x] > 0){
-						continue;
+					continue;
+				}else if((sX-x)**2 <= 1 && (sY-y)**2 <= 1){
+					continue;
 				}
 				// 地雷を設置
 				this._vboard[y][x] = 1;
