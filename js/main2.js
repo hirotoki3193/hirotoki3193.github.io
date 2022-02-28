@@ -54,4 +54,18 @@ $(function(){
 
 		});
 	});
+	$('.triangle').on({
+		'mouseover':function(){
+			$('.three-dimention').css('animation-duration','15s');
+		},'mouseout':function(){
+			$('.three-dimention').css('animation-duration','');
+		}
+	});
+	$('.char').on({
+		'mouseover':function(){
+			$('.words').css('animation-duration','10s');
+		},'mouseout':function(){
+			$('.words').css('animation-duration','');
+		}
+	});
 });
