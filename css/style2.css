@@ -421,3 +421,6 @@ section.show{
     transform: translateZ(300px) translateY(100px);
     filter:blur(4px)
 }
+.char,.triangle{
+	cursor:pointer
+}
