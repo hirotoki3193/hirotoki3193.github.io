@@ -163,7 +163,7 @@ class MineSweeper{
 			}
 		}
 		if(count == 0){
-			for(let i=0;i<4;i++){
+			for(let i=0;i< dx.length;i++){
 				let nx = x + dx[i],
 					ny = y + dy[i];
 				// 範囲外は探しに行かない
