@@ -89,7 +89,7 @@ $(function(){
 	});
 
 	$('#table1').on('mousedown', 'td', function(event){
-		if ((ms.start ^ ms.end) && event.buttons == 3){
+		if ((ms.start ^ ms.end) && $(this).html() && event.buttons == 3){
 			let tdId = $(this).attr('id'),
 				flen = 0,
 				flags = [],
