@@ -225,3 +225,9 @@ table{
 	align-items: center;
 	font-size: 3rem;
 }
+#time{
+	position: fixed;
+	top: 0;
+	left: 1%;
+	color: #000;
+}
