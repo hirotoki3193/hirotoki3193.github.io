@@ -1,9 +1,47 @@
+let START_TIME=null,
+	END_TIME=null;
+function restart(){
+    START_TIME = new Date().getTime();
+    END_TIME = null;
+}
+function updateTime(){
+    let now = new Date().getTime();
+    if(START_TIME!=null){
+        if(END_TIME!=null){
+            document.getElementById("time").innerHTML=formatTime(END_TIME-START_TIME);
+
+        }else{
+            document.getElementById("time").innerHTML=formatTime(now-START_TIME);
+        }
+    }
+    window.requestAnimationFrame(updateTime);
+}
+function showEndScreen(){
+    const time=Math.floor((END_TIME-START_TIME)/1000);
+}
+function formatTime(milliseconds){
+    let seconds=Math.floor(milliseconds/1000);
+    let s=Math.floor(seconds%60);
+    let m=Math.floor(seconds/60%60);
+    let h=Math.floor(seconds/60/60%24);
+
+    let formattedTime=h.toString().padStart(2,'0');
+    formattedTime +=':';
+    formattedTime += m.toString().padStart(2, '0');
+    formattedTime += ':';
+    formattedTime += s.toString().padStart(2, '0');
+
+    return formattedTime;``
+}
+
+
+
 // 2次元配列の作成
 generate2DArray = (m, n) => {
 	return Array.from(new Array(m), _ => new Array(n).fill(0));
 };
 const	dx = [1,-1,0,0,1,1,-1,-1],
-	dy = [0,0,1,-1,1,-1,1,-1],
+		dy = [0,0,1,-1,1,-1,1,-1],
       	dlen = dx.length;
 
 // マインスイーパーはここから
@@ -63,7 +101,7 @@ class MineSweeper{
 		const sX = startPosition[0],
 			  sY = startPosition[1];
 		let mine = this._mineCount;
-		if(this._width * this._height - 2 < mine){
+		if(this._width * this._height - 11 < mine){
 			console.log('地雷の数が多いよ！');
 			this._isStart = false;
 			return;
@@ -89,6 +127,7 @@ class MineSweeper{
 				// $(nowId).addClass('mine');
 			}
 			this._isStart = true;
+			restart();
 		}
 	} 
 	get end(){
@@ -144,6 +183,7 @@ class MineSweeper{
 				let mineId = this.index2id(mine.x,mine.y);
 				$(mineId).addClass('mine');
 			}
+			END_TIME = new Date().getTime();
 			this._isEnd = true;
 			return;
 		}
