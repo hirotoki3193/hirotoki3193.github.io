@@ -87,4 +87,52 @@ $(function(){
 			},100);
 		}
 	});
+
+	$('#table1').on('mousedown', 'td', function(event){
+		if ((ms.start ^ ms.end) && event.buttons == 3){
+			let tdId = $(this).attr('id'),
+				flen = 0,
+				flags = [],
+				next = [],
+				x,y;
+			[x,y] = ms.str2IndexArr(tdId);
+			for(let i = 0;i<dlen;++i){
+				let nx = x +dx[i],
+					ny = y +dy[i];
+				// 範囲外判定
+				if(nx < 0 || nx >= ms._width || ny < 0 || ny >= ms._height){
+					continue;
+				// フラグの位置を格納
+				}else if($(ms.index2id(nx,ny)).hasClass('flag')){
+					flags.push([nx,ny]);
+				}
+				next.push([nx,ny]);
+			}
+			flen = flags.length;
+			if($(this).html()<=flen){
+				let mineArr = ms.mines,
+					mlen = mineArr.length;
+				while(flags.length){
+					let flag = flags.shift();
+					const result = mineArr.some(mine=>flag[0]===mine.x&&flag[1]===mine.y);
+					if(!result){
+						console.log("`フラグが間違っています");
+						ms.end= true;
+						// break;
+					}
+				}
+				while(next.length){
+					let nx,ny;
+					[nx,ny] = next.shift();
+					if (!$(ms.index2id(nx, ny)).hasClass('flag') || ms.end){
+						ms.checkIsSafe([nx, ny]);
+					}
+				}
+			}
+		}
+		if (ms.end) {
+			$('.result').find('p').text('GAME OVER...');
+			$('.result').addClass('active');
+		}
+	});
 });
