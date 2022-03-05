@@ -80,7 +80,8 @@ $(function(){
 
 				// 残りが地雷だけなら終了する
 				if(safeCount==board.tdCount - mineCount){
-					isEnd = true;
+					ms.end = true;
+					END_TIME = new Date().getTime();
 					$('.result').find('p').text('congratulations!');
 					$('.result').addClass('active');
 				}
@@ -131,6 +132,7 @@ $(function(){
 			}
 		}
 		if (ms.end) {
+			END_TIME = new Date().getTime();
 			$('.result').find('p').text('GAME OVER...');
 			$('.result').addClass('active');
 		}
